@@ -18,3 +18,13 @@ body {
   text-align: center;
 }
 
+.cardTreino {
+  background-color: rgb(186, 239, 250);
+  width: 18rem;
+  position: relative;
+  margin-left: 260px;
+  margin-top: 150px;
+  
+  
+}
+
