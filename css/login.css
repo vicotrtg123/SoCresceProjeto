@@ -1,0 +1,25 @@
+#telalogin{
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 1px 5px 30px rgb(192, 195, 195);
+}
+#fundoDaTelaDeLogin{
+    background-image: url('../Imagens/soCresceLogotipo.png');
+    background-color: rgb(95, 95, 96);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.btn {
+    background-color: rgb(46, 44, 44);
+    width: 100%
+}
