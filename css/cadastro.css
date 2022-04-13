@@ -1,4 +1,4 @@
-#telaLogin {
+#telaCadastro{
     width: 50%;
     position: absolute;
     top: 50%;
@@ -6,7 +6,7 @@
     transform: translate(-50%, -50%);
     box-shadow: 1px 5px 30px rgb(192, 195, 195);
 }
-#fundoTelaLogin{
+#fundoTelaCadastro{
     background-image: url('../Imagens/soCresceLogotipo.png');
     background-color: rgb(95, 95, 96);
     background-attachment: fixed;
@@ -22,9 +22,4 @@
 .btn {
     background-color: rgb(46, 44, 44);
     width: 100%
-}
-
-.txtCadastro {
-    margin-left: 15%;
-    text-decoration: none
 }

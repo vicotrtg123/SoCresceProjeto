@@ -8,23 +8,35 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/login.css">
-    <title>Login</title>
+    <link rel="stylesheet" href="css/cadastro.css">
+    <title>Cadastro</title>
   </head>
-  <body id="fundoDaTelaDeLogin">
-    <div class="card" id = "telalogin">
+  <body id="fundoTelaCadastro">
+    <div class="card" id = "telaCadastro">
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body">
             <form> 
                 <div class="mb-3">
-                  <label class="form-label">Usuário</label>
-                  <input type="email" class="form-control" placeholder="Insira seu Usuário">
+                  <label class="form-label">Nome</label>
+                  <input class="form-control" placeholder="Insira seu Nome">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">CPF</label>
+                  <input class="form-control "placeholder="Insira seu CPF">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input class="form-control "placeholder="Insira seu Email">
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Senha</label>
-                  <input type="Senha" class="form-control "placeholder="Insira sua Senha">
+                  <input class="form-control "placeholder="Insira sua Senha">
                 </div>
-                <button type="submit" class="btn btn-success btn-block">Logar</button>
+                <div class="mb-3">
+                  <label class="form-label">Confirme sua senha</label>
+                  <input class="form-control "placeholder="Confime sua senha">
+                </div>
+                <button type="submit" class="btn btn-success btn-block">Confirmar</button>
               </form>
         </div>
       </div>
