@@ -18,4 +18,18 @@ async function CarregarTodosUsuarios(){
     return rows;
 } 
 
-module.exports = {CarregarTodosUsuarios}
+async function ValidarEmailSenha(email, senha){
+    const conn = await connect();
+    const sql = 'Select * from usuario where email=? and senha=?;';
+    const values = [email, senha];
+    
+    //return await conn.query(sql, values);
+    const usuario = await conn.query(sql, values);
+    
+    if(usuario !== '')
+        return true
+    else    
+        return false
+} 
+
+module.exports = {CarregarTodosUsuarios, ValidarEmailSenha}
