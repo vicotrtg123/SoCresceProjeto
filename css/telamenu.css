@@ -24,8 +24,15 @@ body {
   position: relative;
   margin-left: 15%;
   margin-top: 10%;
+  position: relative;
 }
 
+.tituloCardTreino {
+  color: rgb(214, 122, 46);
+  font-weight: bold;
+}
+
+/*
 .cardAnuncio1 {
   background-color: rgb(255, 200, 229);
   width: 20rem;
@@ -41,7 +48,4 @@ body {
   margin-top: 5%;
 }
 
-.tituloCardTreino {
-  color: rgb(214, 122, 46);
-  font-weight: bold;
-}
+
