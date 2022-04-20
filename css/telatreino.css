@@ -4,7 +4,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-  }
+}
 
 .footer {
 	position:absolute;
@@ -16,15 +16,65 @@ body {
 .container {
   color: white;
   text-align: center;
+  display: grid;
+  }
+
+
+#card-esquerda {
+  background-color: rgb(250, 196, 186);
+  width: 100%;
+
+  height: 300%;
+  
 }
 
-
-
-
-.card {
-  background-color: rgb(186, 239, 250);
-  width: 20rem;
-  position: relative;
-  margin-left: 5%;
-  margin-top: 5%;
+#card-direita {
+  background-color: rgb(250, 196, 186);
+  width: 100%;
+  height: 150%;
+  
 }
+
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+#cards_treinos{
+  width: 100%;
+  height: 100%;
+  background-color:rgb(255, 0, 200);
+}
+
+#tela-esquerda{
+ margin-top: 1%;
+ width: 50%;
+ height: 100%;
+ background-color:#FF0;
+}
+
+#tela-direita{
+  margin-top: 1%;
+  width: 50%;
+  height: 100%;
+  background-color:rgb(13, 241, 6);
+ }
