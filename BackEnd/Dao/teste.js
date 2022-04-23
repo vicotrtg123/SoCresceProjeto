@@ -24,8 +24,16 @@
 //})();
 
 (async () =>{
-    const db = require("../js/uNegLogar");
+  //Instancia a classe Dao
+  const db = require("../Dao/db");
+  
+  //Verifica se o SQL retonou algum registro compativel com os filtros
+  const PodeLogar = await db.ValidarEmailSenha("victor", "123");
+  console.log(PodeLogar);
 
-    db.ValidarCredenciais("ff", "1234");
- 
+  //Se Achou o user e senha então deixa logar
+  if (PodeLogar == true)
+      console.log("Logou")
+  else
+      console.log("Não Logou")  
 })();
