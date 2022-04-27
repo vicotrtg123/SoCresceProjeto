@@ -26,14 +26,14 @@
         </button>
         <div class="collapse navbar-collapse" id="textoNavbar">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="telamenu.html">Home <span class="sr-only">(Página atual)</span></a>
+            <li class="nav-item">
+              <a class="nav-link" href="telamenu.html">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="telatreino.html">Treinos</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="instrutores.html">Instrutores</a>
+            <li class="nav-item active">
+              <a class="nav-link" href="instrutores.html">Instrutores <span class="sr-only">(Página atual)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="login.html">Sair</a>
@@ -41,7 +41,32 @@
           </ul>
         </div>
     </nav>
-
+    <table class="table">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">Nº CREF</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-primary">
+          <th scope="row">######-#</th>
+          <td>José Arnaldo dos Santos</td>
+          <td>jose@gmail.com</td>
+        </tr>
+        <tr class="table-primary">
+          <th scope="row">######-#</th>
+          <td>Anita Oliveira</td>
+          <td>anitaoliveira@hotmail.com</td>
+        </tr>
+        <tr class="table-primary">
+          <th scope="row">######-#</th>
+          <td>Angela Augusta da Silva</td>
+          <td>angelaaugustasilva@gmail.com</td>
+        </tr>
+      </tbody>
+    </table>
     <!--Rodapé da tela inicial-->
     <footer class="footer" id="footerSection">
         <div class="container">
@@ -54,13 +79,5 @@
             </div>
         </div>
     </footer>
-        <!-- Cards da tela-->
-        <div class="cardTreino" onclick="irTelaTreino();">
-          <img class="card-img-top" src="Imagens/imagemCardCrieSeuTreino.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="tituloCardTreino">Crie seu treino!</h5>
-            <p class="card-text">Crie seu treino de forma independente!</p>
-          </div>
-        </div>
 </body>
 </html>
