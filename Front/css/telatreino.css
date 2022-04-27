@@ -1,80 +1,117 @@
 body {
-    background-image: url('../Imagens/TelaInicialFundo.png');
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
+  background-image: url('../Imagens/TelaInicialFundo.png');
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 }
 
-.footer {
-	position:absolute;
-	bottom:0;
-	width:100%;
-  background: #343a40;
+#modal-content {
+  background-color: rgb(172, 237, 237);
+}
+
+footer {
+position:absolute;
+bottom:0;
+width:100%;
+background: #343a40;
 }
 
 .container {
-  color: white;
-  text-align: center;
-  display: grid;
-  }
+color: white;
+text-align: center;
+display: grid;
+}
 
-
-#card-esquerda {
-  background-color: rgb(250, 196, 186);
-  width: 100%;
-
-  height: 300%;
+#container-fluid {
+width: 100%;  
+height: 100%;
   
+}
+
+#card-esquerda1 {
+background-color: rgb(143, 217, 240);
+width: 100%;
+height: 100%;
+
+}
+
+#card-esquerda2 {
+background-color: rgb(143, 217, 240);
+width: 100%;
+height: 100%;
+
 }
 
 #card-direita {
-  background-color: rgb(250, 196, 186);
-  width: 100%;
-  height: 150%;
-  
+background-color: rgb(143, 217, 240);
+width: 100%;
+height: 100%;
+
 }
 
 .column {
-  float: left;
-  width: 25%;
-  padding: 0 10px;
+float: left;
+width: 25%;
+height: 90%;
+padding: 0 10px;
+}
+
+#id-html{
+height: 100%;
+width: 100%;
+}
+
+#coluna{
+column-gap: 40px;
 }
 
 /* Remove extra left and right margins, due to padding in columns */
-.row {margin: 0 -5px;}
+.row {margin: 0 -5px;
+height: 100%;
+}
 
 /* Clear floats after the columns */
 .row:after {
-  content: "";
-  display: table;
-  clear: both;
+content: "";
+display: table;
+clear: both;
 }
 
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-  }
-}
-#cards_treinos{
+.column {
   width: 100%;
-  height: 100%;
-  background-color:rgb(255, 0, 200);
+  display: block;
+  margin-bottom: 20px;
+}
+}
+
+#cards_treinos{
+width: 100%;
+height: 82%;
 }
 
 #tela-esquerda{
- margin-top: 1%;
- width: 50%;
- height: 100%;
- background-color:#FF0;
+margin-top: 1%;
+width: 50%;
+height: 100%;
 }
 
 #tela-direita{
-  margin-top: 1%;
-  width: 50%;
-  height: 100%;
-  background-color:rgb(13, 241, 6);
- }
+margin-top: 1%;
+width: 50%;
+height: 100%;
+}
+
+#btn-cards{
+ width: 100%;
+ height: 10%;
+}
+
+#card-body{
+width: 100%;
+height: 100%;
+margin-top: 90%;
+}
