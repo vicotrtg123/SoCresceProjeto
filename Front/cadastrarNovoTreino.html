@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br" id="id-html">
+
+<head>
+  <!-- Meta tags Obrigatórias -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/cadastrarNovoTreino.css" media="screen" />
+</head>
+<body id="body">
+
+  <!-- Modal -->
+  <div class="modal fade" id="ModalSavarExercicio" tabindex="-1" role="dialog" aria-labelledby="ModalSavarExercicioLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" id="modal-content">
+        <div class="modal-header">
+          <div>
+          <h5 class="modal-title" id="ModalSavarExercicioLabel">Exercícios Selecionados</h5> 
+        </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class = "table" >
+            <thead>
+              <tr>
+                <th scope="col">Categoria</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Vídeo</th>
+              </tr>
+            </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Peitoral</th>
+                  <td>Supino reto</td>
+                  <td><button>Assistir</button></td>
+                </tr>
+                <tr>
+                  <th scope="row">Biceps</th>
+                  <td>Rosca direta</td>
+                  <td><button>Assistir</button></td>
+                </tr>
+                <tr>
+                  <th scope="row">Perna</th>
+                  <td>Leg 45</td>
+                  <td><button>Assistir</button></td>
+                </tr>
+              </tbody>
+              <thead class="thead-light">
+                <tr>
+                  <td class = "tdCamposImput" colspan="4">
+                    <form>
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Nome do Treino</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Descrição</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                      </div>
+                    </form>
+                  </td>
+                </tr>
+              </thead>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <div style="display: inline-flex;">
+            <div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="ConfimarExercicios();">Confirmar</button>
+            </div>
+            <div style="width: 5px;"></div>
+            <div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript (Opcional) -->
+  <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+  <!-- Importes JS do dentro do projeto-->
+  <script src="./js/cadastrarNovoTreino.js"></script>
+  
+  <!-- Menus da tela-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-light">
+    <a class="navbar-brand" href="telamenu.html"><img src="Imagens/soCresceLogotipo.png" class="img-fluid" alt="Responsive image"
+        width="50"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textoNavbar"
+      aria-controls="textoNavbar" aria-expanded="false" aria-label="Alterna navegação">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="textoNavbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="telamenu.html">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="telatreino.html">Treinos<span class="sr-only">(Página atual)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="instrutores.html">Instrutores</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.html">Sair</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Tabela de Exercícios-->
+  <table class="table table-bordered table-secondary">
+    <thead class="thead-light">
+    </br>
+    <tr>
+      <td class = "tdExercicio" colspan="4">Exercícios</td>
+    </tr>
+      <tr>
+        <th scope="col">Bíceps</th>
+        <th scope="col">Perna</th>
+        <th scope="col">Peitoral</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Rosca bíceps direta com barra</td>
+        <td>Agachamento com barra</td>
+        <td>Supino reto com barra</td>
+      </tr>
+      <tr>
+        <td>Rosca bíceps direta com halteres</td>
+        <td>Leg press 45º</td>
+        <td>Supino reto com halteres</td>
+      </tr>
+      <tr>
+        <td>Rosca bíceps em pé na barra EZ</td>
+        <td>Agachamento na máquina Smith</td>
+        <td>Flexão de braços básica</td>
+      </tr>
+      <tr>
+        <td>Barra fixa (chinup)</td>
+        <td>Agachamento no rack</td>
+        <td>Flexão de braços inclinada</td>
+      </tr>
+    </tbody>
+    <!--Button Salvar ou Cancelar-->
+    <thead class="thead-light">
+      <tr>
+        <td class = "tdSalvarCancelar" colspan="4">
+          <div style="display: inline-flex;">
+            <div>
+              <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#ModalSavarExercicio">Salvar</button>
+            </div>
+            <div style="width: 5px;"></div>
+            <div>
+              <button type="button" class="btn btn-outline-danger" onclick="CancelarVoltarTelaTreino();">Cancelar</button>   
+            </div>
+          </div>
+        </td>
+      </tr>
+    </thead>
+  </table>
+
+  <!--Rodapé da tela inicial-->
+  <footer class="footer" id="footerSection">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="footer__copyright__text">
+            <p>Copyright © SóCresce</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
