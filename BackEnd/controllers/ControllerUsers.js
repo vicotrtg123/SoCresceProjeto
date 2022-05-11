@@ -26,7 +26,7 @@ module.exports = {
         }
 
         try {
-            let response = await db.query('UPDATE usuarios SET ? WHERE id = ?', [datas, id]);
+            let response = await db.query('UPDATE usuario SET ? WHERE id = ?', [datas, id]);
             res.json(response);
         } catch (error) {
             console.log(error);
@@ -34,16 +34,17 @@ module.exports = {
     },
     async ProcurarTodosOsUsuarios(req, res){
         try {
-            let response = await db.query('SELECT * FROM usuarios');
+            let response = await db.query('SELECT * FROM usuario');
             res.json(response[0]);
         } catch (error) {
             console.log(error);
         }
     },
     async ProcurarUsuarioPorId(req, res){
-        let id = req.params.id;
+        let senha = req.query.senha;
+        let email = req.query.email;
         try {
-            let response = await db.query(`SELECT * FROM usuarios WHERE id = ${id}`);
+            let response = await db.query('SELECT * FROM usuario WHERE senha = ? AND email = ?', [senha, email]);
             res.json(response[0]);
         } catch (error) {
             console.log(error);
@@ -53,7 +54,7 @@ module.exports = {
         let id = req.params.id;
 
         try {
-            let response = await db.query(`DELETE FROM usuarios WHERE id = ${id}`);
+            let response = await db.query(`DELETE FROM usuario WHERE id = ${id}`);
             res.json(response);
         } catch (error) {
             console.log(error);

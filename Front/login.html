@@ -15,16 +15,16 @@
     <div class="card" id = "telaLogin">
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body">
-            <form> 
+            <form action="http://localhost:8089/selecionarusuario" method="GET" enctype="application/x-www-form-urlencoded"> 
                 <div class="mb-3">
                   <label class="form-label">Email</label>
-                  <input class="form-control" placeholder="Insira seu Email">
+                  <input name="email" class="form-control" placeholder="Insira seu Email">
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Senha</label>
-                  <input class="form-control "placeholder="Insira sua Senha">
+                  <input name="senha" class="form-control "placeholder="Insira sua Senha">
                 </div>
-                <button onclick="irTelaTreino();" class="btn btn-success btn-block">Logar</button>
+                <button class="btn btn-success btn-block">Logar</button>
                 <a class="txtCadastro" href="cadastro.html">Não possui cadastro? Clique aqui e cadastre agora para criar seus treinos!</a>
               </form>
         </div>
