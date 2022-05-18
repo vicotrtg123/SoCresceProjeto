@@ -1,6 +1,7 @@
-function irTelaTreino()
-{
-    window.location.href = 'telatreino.html';
-    return false;
-
+module.exports = {
+    async IrTelaTreino(){
+        globalThis.windowVar = '../../Front/telamenu.html';
+    }
 }
+
+

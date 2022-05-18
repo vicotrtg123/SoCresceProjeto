@@ -6,10 +6,13 @@ app.use(express.json());
 const ControllerUsers = require('./controllers/ControllerUsers');
 
 //USUARIOS
+app.use(express.static('C:/Users/Victor/Desktop/SoCresceProjeto/Front'));
+app.use(express.static('C:/Users/Victor/Desktop/SoCresceProjeto/Front/css'));
+
 app.post('/usuario/insert',               ControllerUsers.insert);
 app.put('/usuario/update/:id',            ControllerUsers.update);
 app.get('/usuarios',                      ControllerUsers.ProcurarTodosOsUsuarios);
-app.get('/selecionarusuario',             ControllerUsers.ProcurarUsuarioPorId);
+app.get('/selecionarusuario',             ControllerUsers.ProcurarUsuarioPorEmailSenha);
 //app.delete('/usuario/:senha',             ControllerUsers.delete);
 
 

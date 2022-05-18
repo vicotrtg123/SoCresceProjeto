@@ -40,12 +40,18 @@ module.exports = {
             console.log(error);
         }
     },
-    async ProcurarUsuarioPorId(req, res){
+    async ProcurarUsuarioPorEmailSenha(req, res){
         let senha = req.query.senha;
         let email = req.query.email;
         try {
             let response = await db.query('SELECT * FROM usuario WHERE senha = ? AND email = ?', [senha, email]);
-            res.json(response[0]);
+            if (response[0] == ''){
+                res.sendFile('C:/Users/Victor/Desktop/SoCresceProjeto/Front/Erro.html') 
+            }else{
+                res.sendFile('C:/Users/Victor/Desktop/SoCresceProjeto/Front/telamenu.html');
+
+            }
+
         } catch (error) {
             console.log(error);
         }
