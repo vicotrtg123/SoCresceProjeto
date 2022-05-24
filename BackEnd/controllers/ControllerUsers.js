@@ -1,5 +1,8 @@
 const db = require('../config/db');
 
+var UsuarioLogado = 0;
+
+
 module.exports = {
     async insert(req, res){
         let datas = {
@@ -41,13 +44,15 @@ module.exports = {
         }
     },
     async ProcurarUsuarioPorEmailSenha(req, res){
-        let senha = req.query.senha;
-        let email = req.query.email;
+        let senha = req.body.senha;
+        let email = req.body.email;
         try {
-            let response = await db.query('SELECT * FROM usuario WHERE senha = ? AND email = ?', [senha, email]);
+            let response = await db.query('SELECT id FROM usuario WHERE senha = ? AND email = ?', [senha, email]);
             if (response[0] == ''){
-                res.sendFile('C:/Users/Victor/Desktop/SoCresceProjeto/Front/Erro.html') 
+                res.sendFile('C:/Users/Victor/Desktop/SoCresceProjeto/Front/Erro.html')
             }else{
+                UsuarioLogado = response[0];
+                console.log(UsuarioLogado);
                 res.sendFile('C:/Users/Victor/Desktop/SoCresceProjeto/Front/telamenu.html');
 
             }
