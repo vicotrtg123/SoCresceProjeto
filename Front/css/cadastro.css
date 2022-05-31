@@ -1,6 +1,6 @@
 .footer {
-	position:fixed;
-	bottom: 0%;
+	position:absolute;
+	bottom: 0;
 	width: 100%;
     background: #343a40;
 }
@@ -34,4 +34,8 @@
 .btn {
     background-color: rgb(46, 44, 44);
     width: 100%
+}
+
+.card-body {
+ 
 }
