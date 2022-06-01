@@ -15,18 +15,18 @@
     <div class="card" id = "telaCadastro">
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body">
-            <form> 
+            <form action="http://localhost:8089/usuario/insert" method="post" enctype="application/x-www-form-urlencoded"> 
                 <div class="mb-3">
                   <label class="form-label">Nome</label>
-                  <input class="form-control" placeholder="Insira seu Nome">
+                  <input name="nome" class="form-control" placeholder="Insira seu Nome">
                 </div>
                 <div class="mb-3">
                   <label class="form-label">CPF</label>
-                  <input class="form-control "placeholder="Insira seu CPF">
+                  <input name="cpf" class="form-control "placeholder="Insira seu CPF">
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Email</label>
-                  <input class="form-control "placeholder="Insira seu Email">
+                  <input name="email" class="form-control "placeholder="Insira seu Email">
                 </div>
                 <div class="mb-3">
                   <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
@@ -47,7 +47,7 @@
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Confirme sua senha</label>
-                  <input type="password" class="form-control "placeholder="Confime sua senha">
+                  <input name="senha" type="password" class="form-control "placeholder="Confime sua senha">
                 </div>
                 <button type="submit" class="btn btn-success btn-block">Confirmar</button>
               </form>

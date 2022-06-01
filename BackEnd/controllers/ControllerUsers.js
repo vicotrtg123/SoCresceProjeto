@@ -14,10 +14,11 @@ module.exports = {
 
         try {
             let response = await db.query('INSERT INTO usuario SET ?', [datas]);
-            res.json(response);
+
         } catch (error) {
             console.log(error);
         }
+
     },
     async update(req, res){
         let id = req.params.id;
@@ -51,7 +52,7 @@ module.exports = {
             if (response[0] == ''){
                 res.sendFile('C:/Users/Victor/Desktop/SoCresceProjeto/Front/Erro.html')
             }else{
-                UsuarioLogado = response[0];
+                UsuarioLogado = response.TextRow.id;
                 console.log(UsuarioLogado);
                 res.sendFile('C:/Users/Victor/Desktop/SoCresceProjeto/Front/telamenu.html');
 
