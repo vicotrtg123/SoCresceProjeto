@@ -4,54 +4,33 @@ const app = express();
 
 app.use(express.json());
 
+app.set('view engine', 'ejs');
+
 const ControllerUsers = require('./controllers/ControllerUsers');
+const ControllerInstrutores = require('./controllers/ControllerInstrutores');
 
 var urlencodeParser = bodyParser.urlencoded({ extended: false});
+
 //USUARIOS
-app.use(express.static('C:/Users/Victor/Desktop/SoCresceProjeto/Front'));
-app.use(express.static('C:/Users/Victor/Desktop/SoCresceProjeto/Front/css'));
+app.use(express.static('C:/Users/luiza/Downloads/Proj. Soft. 2/SoCresce/Front'));
+app.use(express.static('C:/Users/luiza/Downloads/Proj. Soft. 2/SoCresce/Front/css'));
+
 
 app.post('/usuario/insert',               ControllerUsers.insert);
 app.put('/usuario/update/:id',            ControllerUsers.update);
+app.put('/usuario/delete/:id',            ControllerUsers.delete);
 app.get('/usuarios',                      ControllerUsers.ProcurarTodosOsUsuarios);
 app.post('/selecionarusuario', urlencodeParser, ControllerUsers.ProcurarUsuarioPorEmailSenha);
-//app.delete('/usuario/:senha',             ControllerUsers.delete);
-
-app.post('/login', async (req, res) => {
-
-    const user = await User.findOne({
-        attributes: ['id', 'name', 'senha'],
-        where:{
-            email: req.body.email
-        }
-    })
-
-    if (user === null){
-        return res.status(400).json({
-            erro: true,
-            mensagem: "Erro"
-        });
-    }
-
-    if (!(await req.body.senha == user.senha)){
-        return res.status(400).json({
-            erro: true,
-            mensagem: "Erro para logar"
-        });   
-    }
-
-    var token = jwt.sign({id: 1}, "wdawdwda", {
-        expireIn: '7d'
-    });
-
-    return res.json({
-        erro: false,
-        mensagem: "Logou",
-        token
-    })
-});
 
 
+app.get('/',       ControllerUsers.login);
+app.get('/erro',   ControllerUsers.erro);
+app.get('/home',   ControllerUsers.home);
+app.get('/login', ControllerUsers.logar);
+app.get('/cadastro', ControllerUsers.cadastro);
+app.get('/telaTreinos', ControllerUsers.telaTreinos);
+app.get('/cadastrarNovoTreino', ControllerUsers.cadastrarNovoTreino);
+app.get('/instrutores',  ControllerInstrutores.ProcurarTodosOsInstrutores);
 
 //https://www.youtube.com/watch?v=TNZQqzbv-QY
 const PORT = process.env.PORT || 8089;

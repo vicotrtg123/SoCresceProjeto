@@ -1,5 +1,5 @@
 function irTelaTreino() {
-    window.location.href = 'telatreino.html';
+    window.location.href = '/telaTreinos';
     return false;
 }
 
