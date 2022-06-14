@@ -12,77 +12,6 @@
 </head>
 <body id="body">
 
-  <!-- Modal -->
-  <div class="modal fade" id="ModalSavarExercicio" tabindex="-1" role="dialog" aria-labelledby="ModalSavarExercicioLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content" id="modal-content">
-        <div class="modal-header">
-          <div>
-          <h5 class="modal-title" id="ModalSavarExercicioLabel">Exercícios Selecionados</h5> 
-        </div>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <table class = "table" >
-            <thead>
-              <tr>
-                <th scope="col">Categoria</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Vídeo</th>
-              </tr>
-            </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Peitoral</th>
-                  <td>Supino reto</td>
-                  <td><button>Assistir</button></td>
-                </tr>
-                <tr>
-                  <th scope="row">Biceps</th>
-                  <td>Rosca direta</td>
-                  <td><button>Assistir</button></td>
-                </tr>
-                <tr>
-                  <th scope="row">Perna</th>
-                  <td>Leg 45</td>
-                  <td><button>Assistir</button></td>
-                </tr>
-              </tbody>
-              <thead class="thead-light">
-                <tr>
-                  <td class = "tdCamposImput" colspan="4">
-                    <form>
-                      <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Nome do Treino</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Descrição</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                      </div>
-                    </form>
-                  </td>
-                </tr>
-              </thead>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <div style="display: inline-flex;">
-            <div>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="ConfimarExercicios();">Confirmar</button>
-            </div>
-            <div style="width: 5px;"></div>
-            <div>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- JavaScript (Opcional) -->
   <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -125,58 +54,58 @@
   </nav>
   
   <!-- Tabela de Exercícios-->
+  <form action="/resultadoTreino" method="post">
   <table class="table table-bordered table-secondary">
-    <thead class="thead-light">
-    </br>
-    <tr>
-      <td class = "tdExercicio" colspan="4">Exercícios</td>
-    </tr>
-      <tr>
-        <th scope="col">Bíceps</th>
+    <thead>
+      <tr class="table-primary">
+        <th scope="col">Supino</th>
+        <th scope="col">Biceps</th>
         <th scope="col">Perna</th>
-        <th scope="col">Peitoral</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>Rosca bíceps direta com barra</td>
-        <td>Agachamento com barra</td>
-        <td>Supino reto com barra</td>
-      </tr>
-      <tr>
-        <td>Rosca bíceps direta com halteres</td>
-        <td>Leg press 45º</td>
-        <td>Supino reto com halteres</td>
-      </tr>
-      <tr>
-        <td>Rosca bíceps em pé na barra EZ</td>
-        <td>Agachamento na máquina Smith</td>
-        <td>Flexão de braços básica</td>
-      </tr>
-      <tr>
-        <td>Barra fixa (chinup)</td>
-        <td>Agachamento no rack</td>
-        <td>Flexão de braços inclinada</td>
+        <td>
+          <% supino.forEach(exercicio1 => { %>
+            <input name="checkboxTreino" type="checkbox" value="<%= exercicio1.id %>">  
+            <%= exercicio1.nome %>
+          <% }); %>
+        </td>
+
+        <td>
+          <% biceps.forEach(exercicio1 => { %>
+            <input name="checkboxTreino" type="checkbox" value="<%= exercicio1.id %>">  
+            <%= exercicio1.nome %>
+          <% }); %>
+        </td>
+
+        <td>
+          <% perna.forEach(exercicio1 => { %>
+            <input name="checkboxTreino" type="checkbox" value="<%= exercicio1.id %>">  
+            <%= exercicio1.nome %>
+          <% }); %>
+        </td>
       </tr>
     </tbody>
+    
     <!--Button Salvar ou Cancelar-->
     <thead class="thead-light">
       <tr>
         <td class = "tdSalvarCancelar" colspan="4">
           <div style="display: inline-flex;">
             <div>
-              <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#ModalSavarExercicio">Salvar</button>
+              <button class="btn btn-outline-success" type="submit">Salvar</button>
             </div>
             <div style="width: 5px;"></div>
             <div>
-              <button type="button" class="btn btn-outline-danger" onclick="CancelarVoltarTelaTreino();">Cancelar</button>   
+              <a href="/telaTreinos" class="btn btn-outline-danger">Cancelar</a>
             </div>
           </div>
         </td>
       </tr>
     </thead>
   </table>
-
+</form>
   <!--Rodapé da tela inicial-->
   <footer class="footer" id="footerSection">
     <div class="container">
