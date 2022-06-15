@@ -1,4 +1,5 @@
 const db = require('../config/db');
+var idUsuarioLogado = 0;
 
 module.exports = {
 
@@ -16,7 +17,8 @@ module.exports = {
     },
 
     async telaTreinos (req, res) {
-        res.render('telaTreinos');
+        let response = await db.query('SELECT t.id, t.descricao, t.nome FROM treino t INNER JOIN alunotreinos a ON t.id = a.idtreino WHERE a.idaluno = ?', idUsuarioLogado);
+        res.render('telatreinos',{ treinos: response[0]});
     },
 
     async cadastrarNovoTreino (req, res) {
@@ -89,9 +91,34 @@ module.exports = {
     },
 
     async resultadoFinalTreino(req, res){
-        let treinos = req.body.treinoId
-        console.log(treinos)
+        let exercicios = req.body.exercicio
 
+        let dadosTreino = {
+            "nome": req.body.nome,
+            "descricao": req.body.descricao
+        }
+
+        let response = await db.query('INSERT INTO treino SET ?', [dadosTreino])
+        let idTreino = await db.query('SELECT MAX(id) AS id FROM treino')
+
+        let alunoTreino = {
+            "idaluno": idUsuarioLogado,
+            "idtreino": idTreino[0][0]["id"]
+        }
+
+        let response2 = await db.query('INSERT INTO alunotreinos SET ?', [alunoTreino])
+
+        for (var i = 0; i < exercicios.length; i++) {
+            
+            let dados = {
+                "idtreino": idTreino[0][0]["id"],
+                "idexercicio": exercicios[i]
+            }
+
+            let response = await db.query('INSERT INTO treinoexercicio SET ?', [dados])
+         }
+         
+         res.redirect('/telaTreinos');
     },
 
     async update(req, res){
