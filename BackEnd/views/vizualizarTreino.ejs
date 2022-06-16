@@ -14,7 +14,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         
-        <form action="/resultadoFinalTreino" method="post">
           <table class = "table" >
             <thead>
               <tr>
@@ -23,58 +22,52 @@
             </thead>
               <tbody>
                 <tr>
-                  <% treinos.forEach(treino => { %>
-                    <input name="exercicio" value="<%= treino.id %>" hidden>
-                    <tr><td><%= treino.nome %></td></tr>
-                <% }); %>
+                  <% exercicio.forEach(e => { %>
+                    <tr><td><%= e.nome %></td></tr>
                 </tr>
+                  <% }); %>
               </tbody>
               <thead class="thead-light">
                 <tr>
                   <td class = "tdCamposImput" colspan="4">
-                    <form>
+                    <form action="/atualizarTreino" method="post">
+                      <% treino.forEach(t => { %>
+                        <input name="idtreino" value="<%= t.id %>" hidden> 
                       <div class="form-group">
                         <label for="exampleFormControlTextarea1">Nome do Treino</label>
-                        <input name="nome" class="form-control" id="exampleFormControlInput1">
+                        <input name="nome" value=" <%= t.nome %> " class="form-control" id="exampleFormControlInput1">
                       </div>
                       <div class="form-group">
                         <label for="exampleFormControlTextarea1">Descrição</label>
-                        <textarea name="descricao" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea name="descricao" class="form-control" id="exampleFormControlTextarea1" rows="3"> <%= t.descricao %> </textarea>
                       </div>
-                    </form>
                   </td>
                 </tr>
               </thead>
+                      <% }); %>
 
               <thead class="thead-light">
                 <tr>
-                  <td class = "tdSalvarCancelar" colspan="4">
+                  <td class= "tdSalvarCancelar" colspan="4">
                     <div style="display: inline-flex;">
                       <div>
-                        <button class="btn btn-outline-success" type="submit">Salvar</button>
+                        <button class="btn btn-outline-success" type="submit">Atualizar</button>
                       </div>
+                      </form> 
+                      <form  action="/excluirTreino" method="post">
+                      <% treino.forEach(t => { %>
+                      <input name="idtreino" value="<%= t.id %>" hidden>
                       <div style="width: 5px;"></div>
                       <div>
-                        <a href="/cadastrarNovoTreino" class="btn btn-outline-danger">Cancelar</a>
+                        <button type="submit" class="btn btn-outline-danger">Excluir</button>
                       </div>
+                      <% }); %>
+                      </form>
                     </div>
                   </td>
                 </tr>
               </thead>
           </table>
         </form>
-
-    <!--Rodapé da tela inicial-->
-    <footer class="footer" id="footerSection">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer__copyright__text">
-                        <p>Copyright © SóCresce</p>
-                    </div>
-                </div> 
-            </div>
-        </div>
-    </footer>
 </body>
 </html>

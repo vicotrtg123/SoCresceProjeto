@@ -33,7 +33,9 @@ app.get('/instrutores',  ControllerInstrutores.ProcurarTodosOsInstrutores);
 app.get('/confirmacaoTreino', ControllerUsers.confirmacaoTreino);
 app.post('/resultadoTreino',  urlencodeParser, ControllerUsers.resultadoTreino);
 app.post('/resultadoFinalTreino',  urlencodeParser, ControllerUsers.resultadoFinalTreino);
-
+app.post('/vizualizarTreino',  urlencodeParser, ControllerUsers.vizualizarTreino);
+app.post('/atualizarTreino',  urlencodeParser, ControllerUsers.atualizarTreino);
+app.post('/excluirTreino',  urlencodeParser, ControllerUsers.excluirTreino);
 
 //https://www.youtube.com/watch?v=TNZQqzbv-QY
 const PORT = process.env.PORT || 8089;

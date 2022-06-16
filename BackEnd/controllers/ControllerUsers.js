@@ -121,6 +121,35 @@ module.exports = {
          res.redirect('/telaTreinos');
     },
 
+    async vizualizarTreino(req, res){
+
+        let treinoId = req.body.treino
+        let infoTreino = await db.query('SELECT * FROM treino WHERE id = ?', [treinoId])
+        let exercicios = await db.query('SELECT v.nome FROM treino t INNER JOIN treinoexercicio e ON e.idtreino = t.id INNER JOIN exercicio v ON v.id = e.idexercicio WHERE t.id = ?', [treinoId]);
+
+        res.render('vizualizarTreino', { treino: infoTreino[0], exercicio: exercicios[0]});
+    },
+
+    async atualizarTreino(req, res){
+         
+          let nome = req.body.nome
+          let descricao = req.body.descricao
+          let id = req.body.idtreino  
+
+        let updateTreino = await db.query('UPDATE treino t SET t.nome = ?, t.descricao = ? WHERE t.id = ?', [nome, descricao, id])
+        res.redirect('/telaTreinos')
+    },
+
+    async excluirTreino(req, res) {
+        let id = req.body.idtreino 
+
+        let response = await db.query(`DELETE t.* FROM alunotreinos t WHERE t.idtreino = ${id}`);
+        let response2 = await db.query(`DELETE t.* FROM treinoexercicio t WHERE t.idtreino = ${id}`);
+        let response3 = await db.query(`DELETE FROM treino WHERE id = ${id}`);
+        
+        res.redirect('/telaTreinos')
+    },
+
     async update(req, res){
         let id = req.params.id;
 
