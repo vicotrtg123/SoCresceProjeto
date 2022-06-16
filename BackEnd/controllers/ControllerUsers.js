@@ -92,6 +92,7 @@ module.exports = {
 
     async resultadoFinalTreino(req, res){
         let exercicios = req.body.exercicio
+        let repeticoes = req.body.repeticoes
 
         let dadosTreino = {
             "nome": req.body.nome,
@@ -112,7 +113,8 @@ module.exports = {
             
             let dados = {
                 "idtreino": idTreino[0][0]["id"],
-                "idexercicio": exercicios[i]
+                "idexercicio": exercicios[i],
+                "repeticoes": repeticoes[i]
             }
 
             let response = await db.query('INSERT INTO treinoexercicio SET ?', [dados])
@@ -125,9 +127,27 @@ module.exports = {
 
         let treinoId = req.body.treino
         let infoTreino = await db.query('SELECT * FROM treino WHERE id = ?', [treinoId])
-        let exercicios = await db.query('SELECT v.nome FROM treino t INNER JOIN treinoexercicio e ON e.idtreino = t.id INNER JOIN exercicio v ON v.id = e.idexercicio WHERE t.id = ?', [treinoId]);
+        let exercicios = await db.query('SELECT v.nome, e.repeticoes FROM treino t INNER JOIN treinoexercicio e ON e.idtreino = t.id INNER JOIN exercicio v ON v.id = e.idexercicio WHERE t.id = ?', [treinoId]);
 
         res.render('vizualizarTreino', { treino: infoTreino[0], exercicio: exercicios[0]});
+    },
+
+    async avaliarTreino(req, res){
+        let treino = req.body.treino
+
+        res.render('avaliarTreino', {treinoId: treino});
+    },
+
+    async salvarAvaliacao(req, res){
+        
+        let dados = {
+            "idaluno": idUsuarioLogado,
+            "idtreino": req.body.treino,
+            "descricao": req.body.descricao,
+            "nota": req.body.select
+        }
+
+        console.log(dados)
     },
 
     async atualizarTreino(req, res){

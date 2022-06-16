@@ -19,14 +19,17 @@
             <thead>
               <tr>
                 <th scope="col">Exercício(s)</th>
+                <th scope="col">Repetições</th>
               </tr>
             </thead>
               <tbody>
                 <tr>
                   <% treinos.forEach(treino => { %>
                     <input name="exercicio" value="<%= treino.id %>" hidden>
-                    <tr><td><%= treino.nome %></td></tr>
-                <% }); %>
+                    <tr><td><%= treino.nome %></td>
+                        <td><input name="repeticoes"></td>
+                    </tr>
+                 <% }); %>
                 </tr>
               </tbody>
               <thead class="thead-light">
@@ -63,19 +66,6 @@
               </thead>
           </table>
         </form>
-
-    <!--Rodapé da tela inicial-->
-    <footer class="footer" id="footerSection">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer__copyright__text">
-                        <p>Copyright © SóCresce</p>
-                    </div>
-                </div> 
-            </div>
-        </div>
-    </footer>
 </body>
 </html>
 

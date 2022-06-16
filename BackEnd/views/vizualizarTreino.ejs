@@ -18,12 +18,15 @@
             <thead>
               <tr>
                 <th scope="col">Exercício(s)</th>
+                <th scope="col">Repetições</th>
               </tr>
             </thead>
               <tbody>
                 <tr>
                   <% exercicio.forEach(e => { %>
-                    <tr><td><%= e.nome %></td></tr>
+                    <tr><td><%= e.nome %></td>
+                        <td><%= e.repeticoes %></td>
+                    </tr>
                 </tr>
                   <% }); %>
               </tbody>

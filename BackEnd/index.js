@@ -35,7 +35,10 @@ app.post('/resultadoTreino',  urlencodeParser, ControllerUsers.resultadoTreino);
 app.post('/resultadoFinalTreino',  urlencodeParser, ControllerUsers.resultadoFinalTreino);
 app.post('/vizualizarTreino',  urlencodeParser, ControllerUsers.vizualizarTreino);
 app.post('/atualizarTreino',  urlencodeParser, ControllerUsers.atualizarTreino);
+app.post('/avaliarTreino',  urlencodeParser, ControllerUsers.avaliarTreino);
 app.post('/excluirTreino',  urlencodeParser, ControllerUsers.excluirTreino);
+app.post('/salvarAvaliacao',  urlencodeParser, ControllerUsers.salvarAvaliacao);
+
 
 //https://www.youtube.com/watch?v=TNZQqzbv-QY
 const PORT = process.env.PORT || 8089;
