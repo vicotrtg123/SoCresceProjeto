@@ -6,7 +6,7 @@ app.use(express.json());
 
 app.set('view engine', 'ejs');
 
-const ControllerUsers = require('./controllers/ControllerUsers');
+const ControllerUsuarios = require('./controllers/ControllerUsuarios');
 const ControllerInstrutores = require('./controllers/ControllerInstrutores');
 
 var urlencodeParser = bodyParser.urlencoded({ extended: false});
@@ -15,32 +15,31 @@ app.use(express.static('C:/Users/luiza/Downloads/Proj. Soft. 2/SoCresce/Front'))
 app.use(express.static('C:/Users/luiza/Downloads/Proj. Soft. 2/SoCresce/Front/css'));
 
 //operacoes usuarios
-app.post('/usuario/insert',  urlencodeParser, ControllerUsers.insert);
-app.put('/usuario/update/:id',            ControllerUsers.update);
-app.put('/usuario/delete/:id',            ControllerUsers.delete);
-app.get('/usuarios',                      ControllerUsers.ProcurarTodosOsUsuarios);
-app.post('/selecionarusuario', urlencodeParser, ControllerUsers.ProcurarUsuarioPorEmailSenha);
+app.get('/',       ControllerUsuarios.login);
+app.post('/usuario/insert',  urlencodeParser, ControllerUsuarios.insert);
+app.post('/selecionarusuario', urlencodeParser, ControllerUsuarios.ProcurarUsuarioPorEmailSenha);
+app.get('/login', ControllerUsuarios.logar);
+app.get('/cadastro', ControllerUsuarios.cadastro);
+app.get('/perfil', ControllerUsuarios.perfil);
+
+//operacoes treinos
+app.get('/telaTreinos', ControllerUsuarios.telaTreinos);
+app.get('/cadastrarNovoTreino', ControllerUsuarios.cadastrarNovoTreino);
+app.post('/resultadoTreino',  urlencodeParser, ControllerUsuarios.resultadoTreino);
+app.post('/resultadoFinalTreino',  urlencodeParser, ControllerUsuarios.resultadoFinalTreino);
+app.post('/vizualizarTreino',  urlencodeParser, ControllerUsuarios.vizualizarTreino);
+app.post('/atualizarTreino',  urlencodeParser, ControllerUsuarios.atualizarTreino);
+app.post('/avaliarTreino',  urlencodeParser, ControllerUsuarios.avaliarTreino);
+app.post('/excluirTreino',  urlencodeParser, ControllerUsuarios.excluirTreino);
+app.get('/confirmacaoTreino', ControllerUsuarios.confirmacaoTreino);
+app.post('/salvarAvaliacao',  urlencodeParser, ControllerUsuarios.salvarAvaliacao);
+
+//operacoes instrutores
+app.get('/instrutores',  ControllerInstrutores.ProcurarTodosOsInstrutores);
 
 //operacoes de tela
-app.get('/',       ControllerUsers.login);
-app.get('/erro',   ControllerUsers.erro);
-app.get('/home',   ControllerUsers.home);
-app.get('/login', ControllerUsers.logar);
-app.get('/cadastro', ControllerUsers.cadastro);
-app.get('/telaTreinos', ControllerUsers.telaTreinos);
-app.get('/cadastrarNovoTreino', ControllerUsers.cadastrarNovoTreino);
-app.get('/instrutores',  ControllerInstrutores.ProcurarTodosOsInstrutores);
-app.get('/confirmacaoTreino', ControllerUsers.confirmacaoTreino);
-app.get('/perfil', ControllerUsers.perfil);
-app.post('/resultadoTreino',  urlencodeParser, ControllerUsers.resultadoTreino);
-app.post('/resultadoFinalTreino',  urlencodeParser, ControllerUsers.resultadoFinalTreino);
-app.post('/vizualizarTreino',  urlencodeParser, ControllerUsers.vizualizarTreino);
-app.post('/atualizarTreino',  urlencodeParser, ControllerUsers.atualizarTreino);
-app.post('/avaliarTreino',  urlencodeParser, ControllerUsers.avaliarTreino);
-app.post('/excluirTreino',  urlencodeParser, ControllerUsers.excluirTreino);
-app.post('/salvarAvaliacao',  urlencodeParser, ControllerUsers.salvarAvaliacao);
-app.post('/atualizarPerfil',  urlencodeParser, ControllerUsers.atualizarPerfil);
-
+app.get('/erro',   ControllerUsuarios.erro);
+app.get('/home',   ControllerUsuarios.home);
 
 //https://www.youtube.com/watch?v=TNZQqzbv-QY
 const PORT = process.env.PORT || 8089;

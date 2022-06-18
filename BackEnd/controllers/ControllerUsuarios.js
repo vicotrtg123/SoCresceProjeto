@@ -3,7 +3,9 @@ var idUsuarioLogado = 0;
 
 module.exports = {
 
-    //renderizacao de telas
+    //***************************************************** 
+    //RENDERIZACAO TELAS
+    //***************************************************** 
     async login (req, res) {
         res.render('login');
     },
@@ -16,30 +18,23 @@ module.exports = {
         res.render('home');
     },
 
-    async telaTreinos (req, res) {
-        let response = await db.query('SELECT t.id, t.descricao, t.nome FROM treino t INNER JOIN alunotreinos a ON t.id = a.idtreino WHERE a.idaluno = ?', idUsuarioLogado);
-        res.render('telatreinos',{ treinos: response[0]});
-    },
-
-    async cadastrarNovoTreino (req, res) {
-       
-        try {
-            let responseS = await db.query('SELECT * FROM exercicio WHERE tipo = "S"');
-            let responseB = await db.query('SELECT * FROM exercicio WHERE tipo = "B"');
-            let responseP = await db.query('SELECT * FROM exercicio WHERE tipo = "P"');
-
-            res.render('cadastrarNovoTreino',{ supino: responseS[0],  biceps: responseB[0], perna: responseP[0]}); 
-        } catch (error) {
-            console.log(error);
-        }
-
-        res.render('cadastrarNovoTreino');
-    },
-
     async cadastro (req, res) {
         res.render('cadastro');
     },
 
+
+    //***************************************************** 
+    //EXIBIR INSTRUTORES
+    //***************************************************** 
+    async mostrarInstrutores (req, res) {
+        let response = await db.query('SELECT * FROM instrutor');
+        res.json(response);
+    },  
+
+
+    //***************************************************** 
+    //OPERACOES USUARIO
+    //***************************************************** 
     async perfil (req, res) {
         let response = await db.query(`SELECT nome, cpf, email, senha FROM usuario WHERE id = ${idUsuarioLogado}`);
        
@@ -57,12 +52,6 @@ module.exports = {
         let updateUsuario = await db.query('UPDATE usuario s SET s.nome = ?, s.cpf = ?, s.email = ?, s.senha = ? WHERE s.id = ? AND s.senha = ?', [nome, cpf, email, novaSenha, id, senha])
         res.redirect('/home');
     },
-
-    //funcoes banco
-    async mostrarInstrutores (req, res) {
-        let response = await db.query('SELECT * FROM instrutor');
-        res.json(response);
-    },  
 
     async insert(req, res){
         let datas1 = {
@@ -96,6 +85,80 @@ module.exports = {
         } catch (error) {
             console.log(error);
         }
+    },
+
+    async ProcurarUsuarioPorEmailSenha(req, res){
+        let senha = req.body.senha;
+        let email = req.body.email;
+        
+        try {
+            let response = await db.query('SELECT id FROM usuario WHERE senha = ? AND email = ?', [senha, email]);   
+            if (response[0] == '') {
+                res.redirect('/erro');       
+            } else {
+                idUsuarioLogado = response[0][0]["id"];
+                res.redirect('/home');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async logar(req,res){
+
+        const user = await User.findOne({
+            attributes: ['id', 'name', 'senha'],
+            where:{
+                email: req.body.email
+            }
+        })
+    
+        if (user === null){
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Erro"
+            });
+        }
+    
+        if (!(await req.body.senha == user.senha)){
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Erro para logar"
+            });   
+        }
+    
+        var token = jwt.sign({id: 1}, "wdawdwda", {
+            expireIn: '7d'
+        });
+    
+        return res.json({
+            erro: false,
+            mensagem: "Logou",
+            token
+        })
+    },
+
+    //***************************************************** 
+    //CRUD TREINO
+    //***************************************************** 
+    async telaTreinos (req, res) {
+        let response = await db.query('SELECT t.id, t.descricao, t.nome FROM treino t INNER JOIN alunotreinos a ON t.id = a.idtreino WHERE a.idaluno = ?', idUsuarioLogado);
+        res.render('telatreinos',{ treinos: response[0]});
+    },
+
+    async cadastrarNovoTreino (req, res) {
+       
+        try {
+            let responseS = await db.query('SELECT * FROM exercicio WHERE tipo = "S"');
+            let responseB = await db.query('SELECT * FROM exercicio WHERE tipo = "B"');
+            let responseP = await db.query('SELECT * FROM exercicio WHERE tipo = "P"');
+
+            res.render('cadastrarNovoTreino',{ supino: responseS[0],  biceps: responseB[0], perna: responseP[0]}); 
+        } catch (error) {
+            console.log(error);
+        }
+
+        res.render('cadastrarNovoTreino');
     },
 
     async confirmacaoTreino(req, res){
@@ -184,96 +247,9 @@ module.exports = {
 
         let response = await db.query(`DELETE t.* FROM alunotreinos t WHERE t.idtreino = ${id}`);
         let response2 = await db.query(`DELETE t.* FROM treinoexercicio t WHERE t.idtreino = ${id}`);
-        let response3 = await db.query(`DELETE FROM treino WHERE id = ${id}`);
+        let response3 = await db.query(`DELETE t.* FROM avaliacao t WHERE t.idtreino = ${id}`);
+        let response4 = await db.query(`DELETE FROM treino WHERE id = ${id}`);
         
         res.redirect('/telaTreinos')
-    },
-
-    async update(req, res){
-        let id = req.params.id;
-
-        let datas = {
-            "nome": req.body.nome,
-            "email": req.body.email,
-            "senha": req.body.senha
-        }
-
-        try {
-            let response = await db.query('UPDATE usuario SET ? WHERE id = ?', [datas, id]);
-            res.json(response);
-        } catch (error) {
-            console.log(error);
-        }
-    },
-
-    async ProcurarTodosOsUsuarios(req, res){
-        try {
-            let response = await db.query('SELECT * FROM usuario');
-            
-        } catch (error) {
-            console.log(error);
-        }
-    },
-
-    async ProcurarUsuarioPorEmailSenha(req, res){
-        let senha = req.body.senha;
-        let email = req.body.email;
-        
-        try {
-            let response = await db.query('SELECT id FROM usuario WHERE senha = ? AND email = ?', [senha, email]);   
-            if (response[0] == '') {
-                res.redirect('/erro');       
-            } else {
-                idUsuarioLogado = response[0][0]["id"];
-                res.redirect('/home');
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    },
-
-    async delete(req, res){
-        let id = req.params.id;
-
-        try {
-            let response = await db.query(`DELETE FROM usuario WHERE id = ${id}`);
-            res.json(response);
-        } catch (error) {
-            console.log(error);
-        }
-    },
-
-    async logar(req,res){
-
-        const user = await User.findOne({
-            attributes: ['id', 'name', 'senha'],
-            where:{
-                email: req.body.email
-            }
-        })
-    
-        if (user === null){
-            return res.status(400).json({
-                erro: true,
-                mensagem: "Erro"
-            });
-        }
-    
-        if (!(await req.body.senha == user.senha)){
-            return res.status(400).json({
-                erro: true,
-                mensagem: "Erro para logar"
-            });   
-        }
-    
-        var token = jwt.sign({id: 1}, "wdawdwda", {
-            expireIn: '7d'
-        });
-    
-        return res.json({
-            erro: false,
-            mensagem: "Logou",
-            token
-        })
     }
 }
