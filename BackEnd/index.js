@@ -31,6 +31,7 @@ app.get('/telaTreinos', ControllerUsers.telaTreinos);
 app.get('/cadastrarNovoTreino', ControllerUsers.cadastrarNovoTreino);
 app.get('/instrutores',  ControllerInstrutores.ProcurarTodosOsInstrutores);
 app.get('/confirmacaoTreino', ControllerUsers.confirmacaoTreino);
+app.get('/perfil', ControllerUsers.perfil);
 app.post('/resultadoTreino',  urlencodeParser, ControllerUsers.resultadoTreino);
 app.post('/resultadoFinalTreino',  urlencodeParser, ControllerUsers.resultadoFinalTreino);
 app.post('/vizualizarTreino',  urlencodeParser, ControllerUsers.vizualizarTreino);
@@ -38,6 +39,7 @@ app.post('/atualizarTreino',  urlencodeParser, ControllerUsers.atualizarTreino);
 app.post('/avaliarTreino',  urlencodeParser, ControllerUsers.avaliarTreino);
 app.post('/excluirTreino',  urlencodeParser, ControllerUsers.excluirTreino);
 app.post('/salvarAvaliacao',  urlencodeParser, ControllerUsers.salvarAvaliacao);
+app.post('/atualizarPerfil',  urlencodeParser, ControllerUsers.atualizarPerfil);
 
 
 //https://www.youtube.com/watch?v=TNZQqzbv-QY

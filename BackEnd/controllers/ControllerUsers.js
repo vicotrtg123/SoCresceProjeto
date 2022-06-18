@@ -40,6 +40,24 @@ module.exports = {
         res.render('cadastro');
     },
 
+    async perfil (req, res) {
+        let response = await db.query(`SELECT nome, cpf, email, senha FROM usuario WHERE id = ${idUsuarioLogado}`);
+       
+        res.render('perfil',{ usuario: response[0]});
+    },
+
+    async atualizarPerfil (req, res) {
+        let nome = req.body.nome
+        let cpf = req.body.cpf
+        let email = req.body.email
+        let novaSenha = req.body.novaSenha
+        let senha = req.body.senha
+        let id = idUsuarioLogado
+        
+        let updateUsuario = await db.query('UPDATE usuario s SET s.nome = ?, s.cpf = ?, s.email = ?, s.senha = ? WHERE s.id = ? AND s.senha = ?', [nome, cpf, email, novaSenha, id, senha])
+        res.redirect('/home');
+    },
+
     //funcoes banco
     async mostrarInstrutores (req, res) {
         let response = await db.query('SELECT * FROM instrutor');
@@ -147,7 +165,8 @@ module.exports = {
             "nota": req.body.select
         }
 
-        console.log(dados)
+        let response = await db.query('INSERT INTO avaliacao SET ?', [dados])
+        res.redirect('/telaTreinos');
     },
 
     async atualizarTreino(req, res){
