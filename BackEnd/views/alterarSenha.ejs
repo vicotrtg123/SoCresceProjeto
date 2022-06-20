@@ -45,23 +45,19 @@
     <div class="card" id = "telaCadastro">
       <!-- <img src="..." class="card-img-top" alt="..."> -->
       <div class="card-body">
-          <form action="/atualizarPerfil" method="post"> 
-            <% usuario.forEach(s => { %>
+          <form action="/alterarSenha" method="post"> 
               <div class="mb-3">
-                <label class="form-label">Nome</label>
-                <input name="nome" class="form-control" placeholder="<%= s.nome %>">
+                <label class="form-label">Senha Atual</label>
+                <input name="senha" type="password" class="form-control" placeholder="Digite sua senha atual">
               </div>
               <div class="mb-3">
-                <label class="form-label">CPF</label>
-                <input name="cpf" class="form-control" placeholder="<%= s.cpf %>">
+                <label class="form-label">Nova Senha</label>
+                <input name="novaSenha" type="password" class="form-control" placeholder="Digite sua nova senha">
+                    <br>
+                    <button class="btn btn-outline-success" type="submit">Salvar</button>
+                    <a href="/perfil" class="btn btn-outline-danger">Cancelar</a>
               </div>
-              <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input name="email" class="form-control" placeholder="<%= s.email %>">
-              </div>
-              <% }); %>
-              <button type="submit" class="btn btn-outline-success">Salvar</button>
-              <a href="/paginaAlterarSenha" class="btn btn-outline-success">Alterar Senha</a>
+            </div>
             </form>
       </div>
     </div>

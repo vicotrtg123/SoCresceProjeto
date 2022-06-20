@@ -22,6 +22,10 @@ module.exports = {
         res.render('cadastro');
     },
 
+    async paginaAlterarSenha (req, res) {
+        res.render('alterarSenha');
+    },
+
     
     //***************************************************** 
     //EXIBIR INSTRUTORES
@@ -45,11 +49,18 @@ module.exports = {
         let nome = req.body.nome
         let cpf = req.body.cpf
         let email = req.body.email
+        let id = idUsuarioLogado
+        
+        let updateUsuario = await db.query('UPDATE usuario s SET s.nome = ?, s.cpf = ?, s.email = ? WHERE s.id = ?', [nome, cpf, email, id])
+        res.redirect('/home');
+    },
+
+    async alterarSenha (req, res) {
         let novaSenha = req.body.novaSenha
         let senha = req.body.senha
         let id = idUsuarioLogado
         
-        let updateUsuario = await db.query('UPDATE usuario s SET s.nome = ?, s.cpf = ?, s.email = ?, s.senha = ? WHERE s.id = ? AND s.senha = ?', [nome, cpf, email, novaSenha, id, senha])
+        let updateUsuario = await db.query('UPDATE usuario s SET s.senha = ? WHERE s.id = ? AND s.senha = ?', [novaSenha, id, senha])
         res.redirect('/home');
     },
 

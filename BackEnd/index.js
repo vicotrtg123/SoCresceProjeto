@@ -22,6 +22,8 @@ app.get('/login', ControllerUsuarios.logar);
 app.get('/cadastro', ControllerUsuarios.cadastro);
 app.get('/perfil', ControllerUsuarios.perfil);
 app.post('/atualizarPerfil',  urlencodeParser, ControllerUsuarios.atualizarPerfil);
+app.get('/paginaAlterarSenha', ControllerUsuarios.paginaAlterarSenha);
+app.post('/alterarSenha',  urlencodeParser, ControllerUsuarios.alterarSenha);
 
 //operacoes treinos
 app.get('/telaTreinos', ControllerUsuarios.telaTreinos);
