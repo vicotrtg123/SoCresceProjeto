@@ -22,7 +22,7 @@ module.exports = {
         res.render('cadastro');
     },
 
-
+    
     //***************************************************** 
     //EXIBIR INSTRUTORES
     //***************************************************** 
@@ -143,21 +143,38 @@ module.exports = {
     //***************************************************** 
     async telaTreinos (req, res) {
         let response = await db.query('SELECT t.id, t.descricao, t.nome FROM treino t INNER JOIN alunotreinos a ON t.id = a.idtreino WHERE a.idaluno = ?', idUsuarioLogado);
-        res.render('telatreinos',{ treinos: response[0]});
+        
+        let treinos = []
+        let paginas = []
+        let paginas2 = []
+        paginas.push(treinos)
+        let contador = 0
+        
+        response[0].forEach(element => {
+           if (paginas[contador].length < 3){
+            paginas[contador].push(element)
+           } else {
+            contador = contador + 1
+            treinos = []
+            paginas.push(treinos)
+            paginas[contador].push(element)           
+           }
+        });
+        
+        umaPagina = paginas.pop()
+        res.render('telatreinos',{umaPagina: umaPagina, paginas: paginas});   
     },
 
     async cadastrarNovoTreino (req, res) {
-       
         try {
             let responseS = await db.query('SELECT * FROM exercicio WHERE tipo = "S"');
             let responseB = await db.query('SELECT * FROM exercicio WHERE tipo = "B"');
             let responseP = await db.query('SELECT * FROM exercicio WHERE tipo = "P"');
 
-            res.render('cadastrarNovoTreino',{ supino: responseS[0],  biceps: responseB[0], perna: responseP[0]}); 
+            res.render('cadastrarNovoTreino',{supino: responseS[0],  biceps: responseB[0], perna: responseP[0]}); 
         } catch (error) {
             console.log(error);
         }
-
         res.render('cadastrarNovoTreino');
     },
 
@@ -172,36 +189,40 @@ module.exports = {
     },
 
     async resultadoFinalTreino(req, res){
-        let exercicios = req.body.exercicio
-        let repeticoes = req.body.repeticoes
-
-        let dadosTreino = {
-            "nome": req.body.nome,
-            "descricao": req.body.descricao
-        }
-
-        let response = await db.query('INSERT INTO treino SET ?', [dadosTreino])
-        let idTreino = await db.query('SELECT MAX(id) AS id FROM treino')
-
-        let alunoTreino = {
-            "idaluno": idUsuarioLogado,
-            "idtreino": idTreino[0][0]["id"]
-        }
-
-        let response2 = await db.query('INSERT INTO alunotreinos SET ?', [alunoTreino])
-
-        for (var i = 0; i < exercicios.length; i++) {
-            
-            let dados = {
-                "idtreino": idTreino[0][0]["id"],
-                "idexercicio": exercicios[i],
-                "repeticoes": repeticoes[i]
+        try {
+            let exercicios = req.body.exercicio
+            let repeticoes = req.body.repeticoes
+    
+            let dadosTreino = {
+                "nome": req.body.nome,
+                "descricao": req.body.descricao
             }
+    
+            let response = await db.query('INSERT INTO treino SET ?', [dadosTreino])
+            let idTreino = await db.query('SELECT MAX(id) AS id FROM treino')
+    
+            let alunoTreino = {
+                "idaluno": idUsuarioLogado,
+                "idtreino": idTreino[0][0]["id"]
+            }
+    
+            let response2 = await db.query('INSERT INTO alunotreinos SET ?', [alunoTreino])
+    
+            for (var i = 0; i < exercicios.length; i++) {
+                
+                let dados = {
+                    "idtreino": idTreino[0][0]["id"],
+                    "idexercicio": exercicios[i],
+                    "repeticoes": repeticoes[i]
+                }
+    
+                let response = await db.query('INSERT INTO treinoexercicio SET ?', [dados])
+             }
 
-            let response = await db.query('INSERT INTO treinoexercicio SET ?', [dados])
-         }
-         
-         res.redirect('/telaTreinos');
+             res.redirect('/telaTreinos');
+        } catch (error) {
+            console.log(error);
+        }
     },
 
     async vizualizarTreino(req, res){
@@ -227,7 +248,6 @@ module.exports = {
             "descricao": req.body.descricao,
             "nota": req.body.select
         }
-
         let response = await db.query('INSERT INTO avaliacao SET ?', [dados])
         res.redirect('/telaTreinos');
     },

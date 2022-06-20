@@ -21,6 +21,7 @@ app.post('/selecionarusuario', urlencodeParser, ControllerUsuarios.ProcurarUsuar
 app.get('/login', ControllerUsuarios.logar);
 app.get('/cadastro', ControllerUsuarios.cadastro);
 app.get('/perfil', ControllerUsuarios.perfil);
+app.post('/atualizarPerfil',  urlencodeParser, ControllerUsuarios.atualizarPerfil);
 
 //operacoes treinos
 app.get('/telaTreinos', ControllerUsuarios.telaTreinos);

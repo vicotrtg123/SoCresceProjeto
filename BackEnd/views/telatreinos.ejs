@@ -116,12 +116,10 @@
         </div>
         <div id="tela-direita">
         
-
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-
               <div class="carousel-item active">
-                <% treinos.forEach(treino => { %>
+                <% umaPagina.forEach(treino => { %>
                 <div class="column" style="column-gap: 50px;">
                   <div class="card" id="card-direita">
                     <div class="card-header text-center">
@@ -160,10 +158,51 @@
                   </div>
                 </div>
                 <% }); %>
-                
-              <div class="carousel-item">
-               
               </div>
+            
+              <% paginas.forEach(pagina => { %>
+                <div class="carousel-item">
+                  <% pagina.forEach(treino => { %>
+                  <div class="column" style="column-gap: 50px;">
+                    <div class="card" id="card-direita">
+                      <div class="card-header text-center">
+                        <h><%= treino.nome %></h>
+                      </div>
+                      <div class="card-body text-center" id="card-body">
+                        <p>
+                          <form action="/vizualizarTreino" method="post">
+                            <input name="treino" value="<%= treino.id %>" hidden>
+                            <button type="submit">Acessar
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                              class="bi bi-plus-circle" viewBox="0 0 16 16">
+                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                              <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                            </svg>
+                            </svg>
+                          </button>
+                        </p>
+                          </form>
+                          <form action="/avaliarTreino" method="post">
+                            <input name="treino" value="<%= treino.id %>" hidden>
+                            <button type="submit">Avaliar
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                              class="bi bi-plus-circle" viewBox="0 0 16 16">
+                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                              <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                            </svg>
+                            </svg>
+                          </button>
+                        </p>
+                          </form>
+                      </div>
+                      <div class="card-footer text-center"><%= treino.descricao %></div>
+                    </div>
+                  </div>
+                  <% }); %>
+                </div>
+                <% }); %>
             </div>
            <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -175,7 +214,6 @@
               <span class="sr-only">Next</span>
             </button>
           </div>
-
         </div>
       </div>
     </div>
